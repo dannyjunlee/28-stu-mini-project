@@ -1,3 +1,5 @@
+const { response } = require("../../routes");
+
 const tipForm = document.getElementById('tip-form');
 const tipsContainer = document.getElementById('tip-container');
 const fbBtn = document.getElementById('feedback-btn');
@@ -124,6 +126,19 @@ const showErrors = (errorObj) => {
 // Helper function to send a POST request to the diagnostics route (/api/diagnostics)
 const submitDiagnostics = (submissionObj) => {
   // TODO: your code here
+  fetch('/api/diagnostics', {
+    method: 'POST',
+    body: JSON.stringify(submissionObj)
+  })
+    .then((resonse) => response.json())
+    .then((data) => {
+      alert(data);
+      createCard(submissionObj);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
   console.info(
     '⚠️ Create the logic for the fetch POST request in scripts/index.js'
   );
